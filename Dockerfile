@@ -19,12 +19,8 @@ RUN adduser -S -u 10000 -h $HOME -G jenkins jenkins
 
 # Install sbt
 RUN mkdir -p "$sbt_home/bin"
-RUN curl -sL "http://dl.bintray.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/$sbt_version/sbt-launch.jar" -o /usr/local/sbt/sbt-launch.jar
-ADD sbt /usr/local/sbt/bin/sbt
-RUN chmod 0755 /usr/local/sbt/bin/sbt
+RUN curl -L "https://cocl.us/sbt-0.13.16.tgz" | tar xz -C /usr/local
 
 WORKDIR /home/jenkins
 
 USER jenkins
-
-RUN sbt sbtVersion
