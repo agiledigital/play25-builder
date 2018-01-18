@@ -5,6 +5,7 @@
 
 FROM frolvlad/alpine-oraclejdk8
 MAINTAINER Agile Digital <info@agiledigital.com.au>
+LABEL Description="Docker image with libraries and tools as required for building Play 2.5 projects using SBT " Vendor="Agile Digital" Version="0.1"
 
 RUN apk add --update --no-cache bash libsodium curl
 
