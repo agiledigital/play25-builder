@@ -28,6 +28,13 @@ ENV HOME /home/jenkins
 RUN addgroup -S -g 10000 jenkins
 RUN adduser -S -u 10000 -h $HOME -G jenkins jenkins
 
+# We need to support Openshift's random userid's
+# Openshift leaves the group as root. Exploit this to ensure we can always write to them
+# Ensure we are in the the passwd file
+RUN chmod g+w /etc/passwd
+RUN chgrp -Rf root /home/jenkins && chmod -Rf g+w /home/jenkins
+ENV JENKINS_USER jenkins
+
 # Install sbt
 RUN mkdir -p "$sbt_home/bin"
 RUN curl -L "https://cocl.us/sbt-0.13.16.tgz" | tar xz -C /usr/local
